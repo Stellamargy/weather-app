@@ -7,7 +7,29 @@
     <link rel="stylesheet" href="src/stlye.css">
 </head>
 <body>
-    <h1>Weather App</h1>
+<div class="weather-app-container">
+    <header>
+        <form  >
+            <input type="search" placeholder="Enter city name" autocomplete="off" required/>
+            <input type="submit" value="search">
+        </form>
+    </header>
+    <main>
+        <h1>Nairobi</h1>
+        <p>Wednesday 12:55</p>
+        <div>
+            <div>☀️</div>
+            <div>21°C<br/>Clear Sky</div>
+            <div>
+                <div>Humidity<br/><strong>92%</strong></div>
+                <div>Wind<br/><strong>2.06km/h</strong></div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>This project was coded by <a href="">Stella Margy</a> is open-sourced on <a href="">github</a> and hosted on <a href="">Netlify</a></p>
+    </footer>
+</div>
     <script src="src/app.js"></script>
 </body>
 </html>
