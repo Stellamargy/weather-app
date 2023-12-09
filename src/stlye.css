@@ -19,7 +19,17 @@ div p{
     line-height: 1.5;
    
 }
-
+footer p{
+    font-size: 15px;
+    text-align: center;
+}
+a{
+    color:#885DF1;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
 .weather-app-container{
    background-color: #FFFFFF; 
    max-width: 600px;
