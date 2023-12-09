@@ -8,7 +8,7 @@ main{
     border-bottom: 1px solid #F9F7FE;
     padding: 20px;
 }
-span{
+.weather-humidity,.weather-speed{
     font-weight: 900;
     color: pink;
 }
