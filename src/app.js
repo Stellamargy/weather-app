@@ -31,13 +31,15 @@ displayRealTime(currentDate)
  let weatherHumidityElement=document.querySelector(".weather-humidity");
  let weatherWindElement=document.querySelector(".weather-speed");
  let weatherTemp=document.querySelector(".weather-temp");
- let h1=document.querySelector("h1")
+ let h1=document.querySelector("h1");
+ let icon=document.querySelector(".weather-icon");
 function getWeatherData(response){
     h1.innerHTML=`${response.data.city}`
     weatherTemp.innerHTML=`${Math.floor(response.data.temperature.current)}`;
     weatherDescriptionElement.innerHTML=`${response.data.condition.description}`;
     weatherHumidityElement.innerHTML=`${response.data.temperature.humidity}%`;
     weatherWindElement.innerHTML=`${response.data.wind.speed}km\h`;
+    icon.innerHTML=  `<img src="${response.data.condition.icon_url}" />`;
 
 
 
