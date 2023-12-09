@@ -19,14 +19,15 @@ function displayRealTime(date){
     }
     
 }
-displayRealTime(currentDate)
-//updating real time
-/*setInterval(function () {
-    currentDate = new Date(); // Update the current date
-    displayRealTime(currentDate);
-}, 60000);*/
 
- //Getting real time weather data and inserting in  html.
+//updating real time
+const updateRealTime=()=>{
+    currentDate=new Date();
+    displayRealTime(currentDate)
+};
+setInterval(updateRealTime,60000);
+
+ //Getting real  weather data and inserting in  html.
  let weatherDescriptionElement=document.querySelector("#weather-description");
  let weatherHumidityElement=document.querySelector(".weather-humidity");
  let weatherWindElement=document.querySelector(".weather-speed");
@@ -39,7 +40,7 @@ function getWeatherData(response){
     weatherDescriptionElement.innerHTML=`${response.data.condition.description}`;
     weatherHumidityElement.innerHTML=`${response.data.temperature.humidity}%`;
     weatherWindElement.innerHTML=`${response.data.wind.speed}km\h`;
-    icon.innerHTML=  `<img src="${response.data.condition.icon_url}" />`;
+    icon.innerHTML=  `<img src="${response.data.condition.icon_url}" class="weather-icon"/>`;
 
 
 
