@@ -19,7 +19,7 @@ function displayRealTime(date){
     }
     
 }
-
+displayRealTime(currentDate);
 //updating real time
 const updateRealTime=()=>{
     currentDate=new Date();
