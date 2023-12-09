@@ -1,6 +1,6 @@
 //Getting real time
 let currentDate=new Date();
-let days=["Sunday","Monday","Tuesday","Wednesday","Thursaday","Friday","Saturday"];
+let days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
 function displayRealTime(date){
     let day=date.getDay();
@@ -12,19 +12,28 @@ function displayRealTime(date){
         realTimeElement.innerHTML=`${days[day]} ${0}${hours}:${minutes},`
     }else if(minutes<10){
         realTimeElement.innerHTML=`${days[day]} ${hours}:${0}${minutes},`
+    }else if (minutes<10 && hours<10){
+        realTimeElement.innerHTML=`${days[day]} ${0}${hours}:${0}${minutes},`
     }else{
         realTimeElement.innerHTML=`${days[day]} ${hours}:${minutes},`
     }
     
 }
+displayRealTime(currentDate)
+//updating real time
+/*setInterval(function () {
+    currentDate = new Date(); // Update the current date
+    displayRealTime(currentDate);
+}, 60000);*/
 
-displayRealTime(currentDate);
+ //Getting real time weather data and inserting in  html.
+ let weatherDescriptionElement=document.querySelector("#weather-description");
+ let weatherHumidityElement=document.querySelector(".weather-humidity");
+ let weatherWindElement=document.querySelector(".weather-speed");
+ let weatherTemp=document.querySelector(".weather-temp");
+ let h1=document.querySelector("h1")
 function getWeatherData(response){
-    console.log(response.data);
-    let weatherDescriptionElement=document.querySelector("#weather-description");
-    let weatherHumidityElement=document.querySelector(".weather-humidity");
-    let weatherWindElement=document.querySelector(".weather-speed");
-    let weatherTemp=document.querySelector(".weather-temp");
+    h1.innerHTML=`${response.data.city}`
     weatherTemp.innerHTML=`${Math.floor(response.data.temperature.current)}`;
     weatherDescriptionElement.innerHTML=`${response.data.condition.description}`;
     weatherHumidityElement.innerHTML=`${response.data.temperature.humidity}%`;
@@ -33,17 +42,29 @@ function getWeatherData(response){
 
 
 }
+//api intergration
+
+function searchedCity(city){
+    let apiKey="bfcoa2306cb6b50a21d693ee1219t034";  
+    let apiUrl=`https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`; 
+    axios.get(apiUrl).then(getWeatherData)
+
+}
+
 function getCityInputValue(event){
     //stop the page from reloading
     event.preventDefault()
-    let cityInputElement=document.querySelector(".city-input").value;
-    let h1=document.querySelector("h1");
-    h1.innerHTML=cityInputElement
+    let cityInputElement=document.querySelector(".city-input");
+    // city value
+    let city=cityInputElement.value
     //api intergration
-    let apiKey="bfcoa2306cb6b50a21d693ee1219t034";
-    let apiUrl=`https://api.shecodes.io/weather/v1/current?query=${cityInputElement}&key=${apiKey}`;
-    console.log(apiUrl);
-    axios.get(apiUrl).then(getWeatherData)
+    searchedCity(city);
+  
+   
 }
+
 let searchForm=document.querySelector("#search-form");
 searchForm.addEventListener("submit",getCityInputValue);
+
+
+searchedCity("Nairobi");
