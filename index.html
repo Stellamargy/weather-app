@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kenia&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Roboto&display=swap" rel="stylesheet">
@@ -21,7 +22,7 @@
         <div class="weather-app-details">
             <div>
                 <h1>Nairobi</h1>
-                <p><span id="real-time">Friday 21:35,</span><span> clear sky</span>
+                <p><span id="real-time">Friday 21:35,</span><span id="weather-description"> clear sky</span>
                 <br/>
                 Humidity: <span class="weather-humidity">91%</span>,
                 Wind: <span class="weather-speed">4.12km/h</span>
