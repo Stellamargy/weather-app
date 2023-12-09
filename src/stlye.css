@@ -2,3 +2,10 @@ body{
    font-family: 'Roboto', sans-serif;
    background-color: #F9F7FE;
 }
+.weather-app-container{
+   background-color: #FFFFFF; 
+   max-width: 600px;
+   margin: 50px auto;
+   border-radius: 16px;
+   padding: 25px;
+}
