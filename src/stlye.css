@@ -18,3 +18,15 @@ body{
    border-radius: 8px;
    margin-left: 4px;
 }
+.search-btn{
+    padding: 15px 30px;
+    background-color: #885DF1;
+    border: none;
+    color:#FFFFFF;
+    font-size: 17px;
+    border-radius: 8px;
+}
+.search-btn:hover{
+    cursor: pointer;
+    opacity: 0.6;
+}
