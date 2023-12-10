@@ -1,4 +1,4 @@
-//Getting real time
+//real datetime
 let currentDate=new Date();
 let days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
@@ -6,7 +6,7 @@ function displayRealTime(date){
     let day=date.getDay();
     let hours=date.getHours();
     let minutes=date.getMinutes();
-    //inserting real time in html
+    //inserts datetime in html
     let realTimeElement=document.querySelector("#real-time");
     if (hours<10){
         realTimeElement.innerHTML=`${days[day]} ${0}${hours}:${minutes},`
@@ -19,15 +19,16 @@ function displayRealTime(date){
     }
     
 }
+//displays  datetime when the page loads.
 displayRealTime(currentDate);
-//updating real time
+//continually updates the   datetime.
 const updateRealTime=()=>{
     currentDate=new Date();
     displayRealTime(currentDate)
 };
 setInterval(updateRealTime,60000);
 
- //Getting real  weather data and inserting in  html.
+ //Gets  weather data and inserts in  html.
  let weatherDescriptionElement=document.querySelector("#weather-description");
  let weatherHumidityElement=document.querySelector(".weather-humidity");
  let weatherWindElement=document.querySelector(".weather-speed");
@@ -65,9 +66,9 @@ function getCityInputValue(event){
   
    
 }
-
+//adds event listener to the search button.
 let searchForm=document.querySelector("#search-form");
 searchForm.addEventListener("submit",getCityInputValue);
 
-
+//default city
 searchedCity("Nairobi");
