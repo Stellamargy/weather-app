@@ -42,7 +42,7 @@ function getWeatherData(response){
     weatherHumidityElement.innerHTML=`${response.data.temperature.humidity}%`;
     weatherWindElement.innerHTML=`${response.data.wind.speed}km\h`;
     icon.innerHTML=  `<img src="${response.data.condition.icon_url}" class="weather-icon"/>`;
-console.log(response.data)
+
    
 
 }
@@ -72,4 +72,21 @@ searchForm.addEventListener("submit",getCityInputValue);
 
 //default city
 searchedCity("Nairobi");
+
+let weatherForecastContainer=document.querySelector("#weather-forecast");
+function displayWeatherForecast(){
+    let weatherForecastHtml="";
+    let days=["Mon","Tue","Wed","Thu","Fri"];
+    days.forEach(function(day){
+         weatherForecastHtml=weatherForecastHtml+`
+<div class="day-weather-forecast">
+                <div class="date-time">${day}</div>
+                <div class="day-weather-icon">🌧️</div>
+                <div class="max-min-temp">12º <span>10º</span></div>
+</div>
+`;
+weatherForecastContainer.innerHTML=weatherForecastHtml;
+    })
+};
+displayWeatherForecast();
 
