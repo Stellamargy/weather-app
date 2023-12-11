@@ -42,15 +42,15 @@ function getWeatherData(response){
     weatherHumidityElement.innerHTML=`${response.data.temperature.humidity}%`;
     weatherWindElement.innerHTML=`${response.data.wind.speed}km\h`;
     icon.innerHTML=  `<img src="${response.data.condition.icon_url}" class="weather-icon"/>`;
-
+    weatherForecast(response.data.city);
+    
    
 
 }
 //api intergration
-
+let apiKey="bfcoa2306cb6b50a21d693ee1219t034";
 function searchedCity(city){
-    let apiKey="bfcoa2306cb6b50a21d693ee1219t034";  
-    let apiUrl=`https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`; 
+     let apiUrl=`https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`; 
     axios.get(apiUrl).then(getWeatherData)
 
 }
@@ -63,6 +63,7 @@ function getCityInputValue(event){
     let city=cityInputElement.value
     //api intergration
     searchedCity(city);
+    
   
    
 }
@@ -73,20 +74,32 @@ searchForm.addEventListener("submit",getCityInputValue);
 //default city
 searchedCity("Nairobi");
 
+//implements Javascript template.
 let weatherForecastContainer=document.querySelector("#weather-forecast");
-function displayWeatherForecast(){
+function displayWeatherForecast(response){
+   
     let weatherForecastHtml="";
     let days=["Mon","Tue","Wed","Thu","Fri"];
-    days.forEach(function(day){
-         weatherForecastHtml=weatherForecastHtml+`
-<div class="day-weather-forecast">
-                <div class="date-time">${day}</div>
-                <div class="day-weather-icon">🌧️</div>
-                <div class="max-min-temp">12º <span>10º</span></div>
+    response.data.daily.forEach(function(day,index){
+        if (index<4){
+            //formats datetime received in api into a readable state.
+            let formattedDate=new Date(day.time*1000);
+        let weekday=days[formattedDate.getDay()];
+       weatherForecastHtml=weatherForecastHtml+`
+        <div class="day-weather-forecast">
+                <div class="date-time">${weekday}</div>
+                <div class="day-weather-icon"> <img src="${day.condition.icon_url}" /></div>
+                <div class="max-min-temp">${Math.floor(day.temperature.minimum)}º <span>${Math.floor(day.temperature.maximum)}º</span></div>
 </div>
 `;
+        }
 weatherForecastContainer.innerHTML=weatherForecastHtml;
     })
 };
-displayWeatherForecast();
 
+
+//api intergration for weather forecast.
+function weatherForecast(city){
+    let apiUrl=`https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`
+   axios.get(apiUrl).then(displayWeatherForecast);
+}

@@ -3,7 +3,7 @@ body{
    background-color: #F9F7FE;
 }
 main{
-    margin:30px 0;
+    margin:25px 0;
     border-top:1px solid #F9F7FE;
     border-bottom: 1px solid #F9F7FE;
     padding: 20px;
@@ -17,6 +17,10 @@ span{
 }
 h1{
     margin-bottom: 0;
+}
+img{
+    height: 80px;
+    width: 80px;
 }
 div p{
     line-height: 1.5;
