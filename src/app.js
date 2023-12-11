@@ -28,7 +28,7 @@ const updateRealTime=()=>{
 };
 setInterval(updateRealTime,60000);
 
- //Gets  weather data and inserts in  html.
+ //Gets current weather data and inserts in  html.
  let weatherDescriptionElement=document.querySelector("#weather-description");
  let weatherHumidityElement=document.querySelector(".weather-humidity");
  let weatherWindElement=document.querySelector(".weather-speed");
@@ -42,8 +42,8 @@ function getWeatherData(response){
     weatherHumidityElement.innerHTML=`${response.data.temperature.humidity}%`;
     weatherWindElement.innerHTML=`${response.data.wind.speed}km\h`;
     icon.innerHTML=  `<img src="${response.data.condition.icon_url}" class="weather-icon"/>`;
-
-
+console.log(response.data)
+   
 
 }
 //api intergration
@@ -72,3 +72,4 @@ searchForm.addEventListener("submit",getCityInputValue);
 
 //default city
 searchedCity("Nairobi");
+

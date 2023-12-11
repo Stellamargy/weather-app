@@ -8,6 +8,9 @@ main{
     border-bottom: 1px solid #F9F7FE;
     padding: 20px;
 }
+span{
+    opacity:0.6;
+}
 .weather-humidity,.weather-speed{
     font-weight: 900;
     color: pink;
@@ -78,4 +81,27 @@ a:hover{
 }
 .weather-unit{
     font-size: 35px;
+}
+.weather-forecast-container{
+    display:flex;
+    justify-content: space-around;
+    margin:40px 0;
+   
+}
+.day-weather-forecast{
+    text-align: center;
+}
+.date-time{
+   margin-bottom:20px;
+   opacity:0.6;
+   font-size:17px;
+}
+.day-weather-icon{
+    font-size: 50px;
+    
+}
+.max-min-temp{
+    color:rgb(233, 80, 105);
+    margin-top: 20px;
+    
 }
