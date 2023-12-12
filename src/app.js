@@ -1,52 +1,27 @@
-//real datetime
-let currentDate=new Date();
-let days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-
-function displayRealTime(date){
-    let day=date.getDay();
-    let hours=date.getHours();
-    let minutes=date.getMinutes();
-    //inserts datetime in html
-    let realTimeElement=document.querySelector("#real-time");
-    if (hours<10){
-        realTimeElement.innerHTML=`${days[day]} ${0}${hours}:${minutes},`
-    }else if(minutes<10){
-        realTimeElement.innerHTML=`${days[day]} ${hours}:${0}${minutes},`
-    }else if (minutes<10 && hours<10){
-        realTimeElement.innerHTML=`${days[day]} ${0}${hours}:${0}${minutes},`
-    }else{
-        realTimeElement.innerHTML=`${days[day]} ${hours}:${minutes},`
-    }
-    
-}
-//displays  datetime when the page loads.
-displayRealTime(currentDate);
-//continually updates the   datetime.
-const updateRealTime=()=>{
-    currentDate=new Date();
-    displayRealTime(currentDate)
-};
-setInterval(updateRealTime,60000);
-
- //Gets current weather data and inserts in  html.
+//Select elements in html
  let weatherDescriptionElement=document.querySelector("#weather-description");
  let weatherHumidityElement=document.querySelector(".weather-humidity");
  let weatherWindElement=document.querySelector(".weather-speed");
  let weatherTemp=document.querySelector(".weather-temp");
  let h1=document.querySelector("h1");
  let icon=document.querySelector(".weather-icon");
+ let timeElement=document.querySelector("#real-time")
+ let days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+ //gets weather data from api and inserts in html
 function getWeatherData(response){
+    console.log(new Date(response.data.time*1000).getMinutes());
     h1.innerHTML=`${response.data.city}`
     weatherTemp.innerHTML=`${Math.floor(response.data.temperature.current)}`;
-    weatherDescriptionElement.innerHTML=`${response.data.condition.description}`;
+    weatherDescriptionElement.innerHTML=`,  ${response.data.condition.description}`;
     weatherHumidityElement.innerHTML=`${response.data.temperature.humidity}%`;
     weatherWindElement.innerHTML=`${response.data.wind.speed}km\h`;
     icon.innerHTML=  `<img src="${response.data.condition.icon_url}" class="weather-icon"/>`;
+    timeElement.innerHTML=`${days[new Date(response.data.time*1000).getDay()]},${new Date(response.data.time*1000).getHours()}:${new Date(response.data.time*1000).getMinutes()} `
     weatherForecast(response.data.city);
     
-   
-
 }
+
 //api intergration
 let apiKey="bfcoa2306cb6b50a21d693ee1219t034";
 function searchedCity(city){
@@ -59,14 +34,13 @@ function getCityInputValue(event){
     //stop the page from reloading
     event.preventDefault()
     let cityInputElement=document.querySelector(".city-input");
-    // city value
+    // city value input
     let city=cityInputElement.value
     //api intergration
     searchedCity(city);
     
-  
-   
 }
+
 //adds event listener to the search button.
 let searchForm=document.querySelector("#search-form");
 searchForm.addEventListener("submit",getCityInputValue);
@@ -79,12 +53,13 @@ let weatherForecastContainer=document.querySelector("#weather-forecast");
 function displayWeatherForecast(response){
    
     let weatherForecastHtml="";
-    let days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+    let days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
     response.data.daily.forEach(function(day,index){
         if (index<6){
             //formats datetime received in api into a readable state.
             let formattedDate=new Date(day.time*1000);
             console.log(formattedDate)
+           
         let weekday=days[formattedDate.getDay()];
        weatherForecastHtml=weatherForecastHtml+`
         <div class="day-weather-forecast">
