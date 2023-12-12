@@ -53,7 +53,7 @@ let weatherForecastContainer=document.querySelector("#weather-forecast");
 function displayWeatherForecast(response){
    
     let weatherForecastHtml="";
-    let days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    let days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
     response.data.daily.forEach(function(day,index){
         if (index<6){
             //formats datetime received in api into a readable state.
