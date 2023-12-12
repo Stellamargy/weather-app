@@ -10,14 +10,28 @@
 
  //gets weather data from api and inserts in html
 function getWeatherData(response){
-    console.log(new Date(response.data.time*1000).getMinutes());
+   
     h1.innerHTML=`${response.data.city}`
     weatherTemp.innerHTML=`${Math.floor(response.data.temperature.current)}`;
     weatherDescriptionElement.innerHTML=`,  ${response.data.condition.description}`;
     weatherHumidityElement.innerHTML=`${response.data.temperature.humidity}%`;
     weatherWindElement.innerHTML=`${response.data.wind.speed}km\h`;
     icon.innerHTML=  `<img src="${response.data.condition.icon_url}" class="weather-icon"/>`;
-    timeElement.innerHTML=`${days[new Date(response.data.time*1000).getDay()]},${new Date(response.data.time*1000).getHours()}:${new Date(response.data.time*1000).getMinutes()} `
+    let day=days[new Date(response.data.time*1000).getDay()];
+    let hours=new Date(response.data.time*1000).getHours();
+    let minutes=new Date(response.data.time*1000).getMinutes();
+   
+    //formats date(makes date readable)
+    if (hours<10){
+        timeElement.innerHTML=`${day},${0}${hours}:${minutes}`;
+    }else if(minutes<10){
+        timeElement.innerHTML=`${day},${0}${hours}:${0}${minutes}`;
+    }else if(minutes<10 && hours<10){
+        timeElement.innerHTML=`${day},${0}${hours}:${0}${minutes}`;
+    }else{
+        timeElement.innerHTML=`${day},${hours}:${minutes}`;
+    }
+    
     weatherForecast(response.data.city);
     
 }
@@ -58,16 +72,13 @@ function displayWeatherForecast(response){
         if (index<6){
             //formats datetime received in api into a readable state.
             let formattedDate=new Date(day.time*1000);
-            console.log(formattedDate)
-           
-        let weekday=days[formattedDate.getDay()];
-       weatherForecastHtml=weatherForecastHtml+`
-        <div class="day-weather-forecast">
-                <div class="date-time">${weekday}</div>
-                <div class="day-weather-icon"> <img src="${day.condition.icon_url}" /></div>
-                <div class="max-min-temp">${Math.floor(day.temperature.minimum)}º <span>${Math.floor(day.temperature.maximum)}º</span></div>
-</div>
-`;
+            let weekday=days[formattedDate.getDay()];
+            weatherForecastHtml=weatherForecastHtml+`
+                <div class="day-weather-forecast">
+                    <div class="date-time">${weekday}</div>
+                    <div class="day-weather-icon"> <img src="${day.condition.icon_url}" /></div>
+                    <div class="max-min-temp">${Math.floor(day.temperature.minimum)}º <span>${Math.floor(day.temperature.maximum)}º</span></div>
+                 </div>`;
         }
 weatherForecastContainer.innerHTML=weatherForecastHtml;
     })
