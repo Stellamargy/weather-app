@@ -79,11 +79,12 @@ let weatherForecastContainer=document.querySelector("#weather-forecast");
 function displayWeatherForecast(response){
    
     let weatherForecastHtml="";
-    let days=["Mon","Tue","Wed","Thu","Fri"];
+    let days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
     response.data.daily.forEach(function(day,index){
-        if (index<4){
+        if (index<6){
             //formats datetime received in api into a readable state.
             let formattedDate=new Date(day.time*1000);
+            console.log(formattedDate)
         let weekday=days[formattedDate.getDay()];
        weatherForecastHtml=weatherForecastHtml+`
         <div class="day-weather-forecast">
