@@ -25,7 +25,7 @@ function getWeatherData(response){
     if (hours<10){
         timeElement.innerHTML=`${day},${0}${hours}:${minutes}`;
     }else if(minutes<10){
-        timeElement.innerHTML=`${day},${0}${hours}:${0}${minutes}`;
+        timeElement.innerHTML=`${day},${hours}:${0}${minutes}`;
     }else if(minutes<10 && hours<10){
         timeElement.innerHTML=`${day},${0}${hours}:${0}${minutes}`;
     }else{
