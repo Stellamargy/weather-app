@@ -20,14 +20,16 @@ function getWeatherData(response){
     let day=days[new Date(response.data.time*1000).getDay()];
     let hours=new Date(response.data.time*1000).getHours();
     let minutes=new Date(response.data.time*1000).getMinutes();
+  
    
     //formats date(makes date readable)
-    if (hours<10){
-        timeElement.innerHTML=`${day},${0}${hours}:${minutes}`;
+    if (hours<10 && minutes<10){
+        timeElement.innerHTML=`${day},${0}${hours}:${0}${minutes}`;
     }else if(minutes<10){
         timeElement.innerHTML=`${day},${hours}:${0}${minutes}`;
-    }else if(minutes<10 && hours<10){
-        timeElement.innerHTML=`${day},${0}${hours}:${0}${minutes}`;
+    }else if( hours<10){
+        timeElement.innerHTML=`${day},${0}${hours}:${minutes}`;
+      
     }else{
         timeElement.innerHTML=`${day},${hours}:${minutes}`;
     }
@@ -65,10 +67,11 @@ searchedCity("Nairobi");
 //implements Javascript template.
 let weatherForecastContainer=document.querySelector("#weather-forecast");
 function displayWeatherForecast(response){
-   
+  
     let weatherForecastHtml="";
     let days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
     response.data.daily.forEach(function(day,index){
+        console.log(new Date(day.time*1000))
         if (index<6){
             //formats datetime received in api into a readable state.
             let formattedDate=new Date(day.time*1000);
